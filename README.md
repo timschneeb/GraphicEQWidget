@@ -1,6 +1,6 @@
 # GraphicEQWidget
 
-This is a graphical equalizer widget for Qt. Most code chunks originated from [EqualizerAPO](https://sourceforge.net/projects/equalizerapo/) which is licensed under GPLv2. This widget has been extracted from their project and has been modified to run on any operating system, completely independent of any Win32 calls. Additionally, the layout has been designed to be much more compact and a method to parse Graphic-EQ data has been implemented.
+This is a graphical equalizer widget for Qt. Most code chunks originated from [EqualizerAPO](https://sourceforge.net/projects/equalizerapo/) which is licensed under GPLv2. This widget has been extracted from their project and has been modified to run on any operating system, completely independent of any Win32 calls. Additionally, the layout has been designed to be much more compact, a method to parse Graphic-EQ data has been implemented, and the widget can now properly be themed using QPalettes.
 
 *All credits go to the original EqualizerAPO developer*
 
