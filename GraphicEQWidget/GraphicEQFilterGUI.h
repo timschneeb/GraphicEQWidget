@@ -44,9 +44,13 @@ public:
     void storePreferences(QVariantMap& prefs);
 
     QCheckBox* chk_enable;
+
     void setSidebarHidden(bool hidden);
     void set15BandFreeMode(bool e);
+    void setAutoEqAvailable(bool visible);
+    void setEnableSwitchVisible(bool visible);
     void loadMap(const QMap<float, float> &parameters);
+
 private slots:
 	void insertRow(int index, double hz, double db);
 	void removeRow(int index);
@@ -76,9 +80,7 @@ signals:
     void autoeqClicked();
 
 private:
-	void setFreqEditable(bool editable);
-    void setAutoEqAvailable(bool visible);
-    void setEnableSwitchVisible(bool visible);
+    void setFreqEditable(bool editable);
 
 	Ui::GraphicEQFilterGUI* ui;
 	GraphicEQFilterGUIScene* scene;
