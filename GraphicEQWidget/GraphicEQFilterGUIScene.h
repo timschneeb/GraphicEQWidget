@@ -43,13 +43,16 @@ public:
 	int verifyBands(const std::vector<FilterNode>& nodes);
 	void setBandCount(int value) override;
 
+    void set15BandFreeMode(bool e);
+    bool get15BandFreeMode();
 signals:
 	void nodeInserted(int index, double hz, double db);
 	void nodeRemoved(int index);
 	void nodeUpdated(int index, double hz, double db);
 	void nodeMoved(int fromIndex, int toIndex);
 	void nodeSelectionChanged(int index, bool selected);
-	void updateModel();
+    void updateModel(bool isMoving);
+    void nodeMouseUp(int index);
 
 protected:
 	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override;
@@ -58,6 +61,6 @@ protected:
 private:
 	std::vector<FilterNode> nodes;
 	QList<GraphicEQFilterGUIItem*> items;
-
+    bool freeMode15 = false;
 	bool noUpdateModel = false;
 };

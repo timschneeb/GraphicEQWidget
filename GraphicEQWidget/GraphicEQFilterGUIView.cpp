@@ -19,6 +19,8 @@
 
 #include "GraphicEQFilterGUIScene.h"
 #include "GraphicEQFilterGUIView.h"
+
+#include "helpers/ColorHelper.h"
 #include <cmath>
 
 GraphicEQFilterGUIView::GraphicEQFilterGUIView(QWidget* parent)
@@ -55,6 +57,7 @@ void GraphicEQFilterGUIView::drawBackground(QPainter* painter, const QRectF& rec
 			path.lineTo(x, y);
 		}
 	}
-	painter->setPen(Qt::black);
+    painter->setPen(ColorHelper::isLightPalette(palette()) ? palette().color(QPalette::Disabled,QPalette::WindowText).darker() :
+                                     palette().color(QPalette::Disabled,QPalette::WindowText).lighter());
 	painter->drawPath(path);
 }

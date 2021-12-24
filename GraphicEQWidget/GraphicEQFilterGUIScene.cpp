@@ -82,7 +82,7 @@ void GraphicEQFilterGUIScene::addNode(double hz, double db)
 		items[i]->update();
 
 	if (!noUpdateModel)
-		emit updateModel();
+        emit updateModel(false);
 }
 
 void GraphicEQFilterGUIScene::removeNode(int index)
@@ -105,7 +105,7 @@ void GraphicEQFilterGUIScene::removeNode(int index)
 		items[i]->update();
 
 	if (!noUpdateModel)
-		emit updateModel();
+        emit updateModel(false);
 }
 
 void GraphicEQFilterGUIScene::setNode(int index, double hz, double db)
@@ -153,7 +153,7 @@ void GraphicEQFilterGUIScene::setNode(int index, double hz, double db)
 	update(rect);
 
 	if (!noUpdateModel)
-		emit updateModel();
+        emit updateModel(false);
 }
 
 void GraphicEQFilterGUIScene::setSelectedNodes(QSet<int> indices)
@@ -179,7 +179,7 @@ void GraphicEQFilterGUIScene::itemMoved(int index)
 	double db = yToDb(item->scenePos().y());
 	double oldHz = item->getHz();
 	double hz;
-	if (getBandCount() != -1)
+    if (getBandCount() != -1 && !freeMode15)
 	{
 		hz = oldHz;
 	}
@@ -238,7 +238,7 @@ void GraphicEQFilterGUIScene::itemMoved(int index)
 	update(rect);
 
 	if (!noUpdateModel)
-		emit updateModel();
+        emit updateModel(true);
 }
 
 void GraphicEQFilterGUIScene::itemSelectionChanged(int index, bool selected)
@@ -367,6 +367,13 @@ void GraphicEQFilterGUIScene::setBandCount(int value)
 		FrequencyPlotScene::setBandCount(value);
 
 		if (!noUpdateModel)
-			emit updateModel();
+            emit updateModel(false);
 	}
+}
+
+void GraphicEQFilterGUIScene::set15BandFreeMode(bool e){
+    freeMode15 = e;
+}
+bool GraphicEQFilterGUIScene::get15BandFreeMode(){
+    return freeMode15;
 }

@@ -20,6 +20,8 @@
 #include <QGraphicsScene>
 #include <cmath>
 #include <algorithm>
+#include <QApplication>
+#include <QPalette>
 
 #include "FrequencyPlotScene.h"
 #include "FrequencyPlotItem.h"

@@ -24,6 +24,8 @@
 
 #include "FrequencyPlotView.h"
 #include "FrequencyPlotHRuler.h"
+#include <QApplication>
+#include <QPalette>
 
 using namespace std;
 
@@ -39,7 +41,7 @@ void FrequencyPlotHRuler::paintEvent(QPaintEvent*)
 	FrequencyPlotView* view = qobject_cast<FrequencyPlotView*>(parentWidget());
 	FrequencyPlotScene* s = view->scene();
 	QFontMetrics metrics = painter.fontMetrics();
-	painter.setPen(QColor(50, 50, 50));
+    painter.setPen(qApp->palette().text().color());
 
 	QPointF topLeft = view->mapToScene(0, 0);
 	QPointF bottomRight = view->mapToScene(view->viewport()->width(), view->viewport()->height());
@@ -64,7 +66,7 @@ void FrequencyPlotHRuler::paintEvent(QPaintEvent*)
 					text = QString("%0").arg(hz);
 				else
 					text = QString("%0k").arg(hz / 1000);
-				if (metrics.width(text) + 2 < s->hzToX(hz + hzBase) - x)
+                if (metrics.horizontalAdvance(text) + 2 < s->hzToX(hz + hzBase) - x)
 					painter.drawText(x - topLeft.x() + offsetLeft + 1, 0, 0, height(), Qt::TextDontClip | Qt::AlignCenter, text);
 			}
 
@@ -126,7 +128,11 @@ void FrequencyPlotHRuler::paintEvent(QPaintEvent*)
 void FrequencyPlotHRuler::wheelEvent(QWheelEvent* event)
 {
 	FrequencyPlotView* view = qobject_cast<FrequencyPlotView*>(parentWidget());
-	view->zoom(event->angleDelta().y(), 0, event->x() - view->viewportMargins().left(), 0);
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    view->zoom(event->angleDelta().y(), 0, event->x() - view->viewportMargins().left(), 0);
+#else
+    view->zoom(event->angleDelta().y(), 0, event->position().x() - view->viewportMargins().left(), 0);
+#endif
 }
 
 void FrequencyPlotHRuler::mouseMoveEvent(QMouseEvent* event)

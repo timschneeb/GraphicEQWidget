@@ -18,7 +18,9 @@
 */
 
 #include <QPainter>
-
+#include <QApplication>
+#include <QPalette>
+#include "helpers/ColorHelper.h"
 #include "helpers/DPIHelper.h"
 #include "GraphicEQFilterGUIScene.h"
 #include "GraphicEQFilterGUIItem.h"
@@ -29,7 +31,14 @@ GraphicEQFilterGUIItem::GraphicEQFilterGUIItem(int index, double hz, double db)
 	: FrequencyPlotItem(hz, db), index(index)
 {
 	setFlag(ItemIsMovable);
-	setFlag(ItemIsSelectable);
+    setFlag(ItemIsSelectable);
+}
+
+void GraphicEQFilterGUIItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    GraphicEQFilterGUIScene* s = qobject_cast<GraphicEQFilterGUIScene*>(scene());
+    s->nodeMouseUp(index);
+    QGraphicsItem::mouseReleaseEvent(event);
 }
 
 QRectF GraphicEQFilterGUIItem::boundingRect() const
@@ -47,14 +56,26 @@ QPainterPath GraphicEQFilterGUIItem::shape() const
 
 void GraphicEQFilterGUIItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	painter->setBrush(Qt::white);
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
+
+    auto pal = qApp->palette();
+    auto shape_border_light = pal.color(QPalette::Disabled,QPalette::WindowText).darker(150);
+    auto shape_border_dark = pal.color(QPalette::Disabled,QPalette::Window).lighter(150);
+    auto text_light = pal.color(QPalette::Active,QPalette::WindowText).darker(120);
+    auto text_dark = pal.color(QPalette::Active,QPalette::WindowText).lighter(120);
+
+    painter->setBrush(qApp->palette().window());
+    painter->setPen(ColorHelper::isLightPalette(pal) ? shape_border_light : shape_border_dark);
 	if (isSelected())
 		painter->setBrush(QColor(38, 147, 255));
 	painter->drawPath(shape());
 	if (index < 99)
 	{
 		if (isSelected())
-			painter->setPen(Qt::white);
+            painter->setPen(qApp->palette().window().color());
+        else
+            painter->setPen(ColorHelper::isLightPalette(pal) ? text_light : text_dark);
 
 		QFont font;
 		font.setPixelSize(DPIHelper::scale(9));
@@ -62,7 +83,7 @@ void GraphicEQFilterGUIItem::paint(QPainter* painter, const QStyleOptionGraphics
 		QFontMetrics metrics(font);
 		painter->setFont(font);
 		QString text = QString::number(index + 1);
-		painter->drawText(-metrics.width(text) / 2, metrics.boundingRect('0').height() / 2, text);
+        painter->drawText(-metrics.horizontalAdvance(text) / 2, metrics.boundingRect('0').height() / 2, text);
 	}
 }
 
@@ -81,9 +102,9 @@ QVariant GraphicEQFilterGUIItem::itemChange(QGraphicsItem::GraphicsItemChange ch
 		s->itemSelectionChanged(index, value.toBool());
 	}
 	else if (change == ItemPositionChange)
-	{
+    {
 		GraphicEQFilterGUIScene* s = qobject_cast<GraphicEQFilterGUIScene*>(scene());
-		if (s->getBandCount() != -1)
+        if (s->getBandCount() != -1 && !s->get15BandFreeMode())
 		{
 			QPointF newPos = value.toPointF();
 			newPos.setX(s->hzToX(getHz()));

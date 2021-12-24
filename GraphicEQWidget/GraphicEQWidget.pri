@@ -3,6 +3,7 @@ SOURCES += \
     $$PWD/GraphicEQFilterGUIItem.cpp \
     $$PWD/GraphicEQFilterGUIScene.cpp \
     $$PWD/GraphicEQFilterGUIView.cpp \
+    $$PWD/helpers/ColorHelper.cpp \
     $$PWD/helpers/DPIHelper.cpp \
     $$PWD/helpers/GainIterator.cpp \
     $$PWD/widgets/FrequencyPlotHRuler.cpp \
@@ -16,6 +17,7 @@ HEADERS += \
     $$PWD/GraphicEQFilterGUIItem.h \
     $$PWD/GraphicEQFilterGUIScene.h \
     $$PWD/GraphicEQFilterGUIView.h \
+    $$PWD/helpers/ColorHelper.h \
     $$PWD/helpers/DPIHelper.h \
     $$PWD/helpers/GainIterator.h \
     $$PWD/widgets/FrequencyPlotHRuler.h \

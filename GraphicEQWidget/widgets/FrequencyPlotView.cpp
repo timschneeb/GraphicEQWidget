@@ -75,7 +75,7 @@ void FrequencyPlotView::drawBackground(QPainter* painter, const QRectF& drawRect
 	double fromDb = floor(s->yToDb(rect.top() + rect.height()) / dbStep) * dbStep;
 	double toDb = ceil(s->yToDb(rect.top()) / dbStep) * dbStep;
 
-	painter->setPen(QColor(200, 200, 200));
+    painter->setPen(palette().window().color());
 	for (double db = fromDb; db <= toDb; db += dbStep)
 	{
 		double y = floor(s->dbToY(db)) + 0.5;
@@ -180,7 +180,11 @@ void FrequencyPlotView::wheelEvent(QWheelEvent* event)
 {
 	event->accept();
 	int delta = event->angleDelta().y();
-	zoom(delta, delta, event->x(), event->y());
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    zoom(delta, delta, event->x(), event->y());
+#else
+    zoom(delta, delta, event->position().x(), event->position().y());
+#endif
 }
 
 void FrequencyPlotView::scrollContentsBy(int dx, int dy)

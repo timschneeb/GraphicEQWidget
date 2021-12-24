@@ -20,6 +20,8 @@
 #include <QWheelEvent>
 #include <cmath>
 #include <algorithm>
+#include <QApplication>
+#include <QPalette>
 
 #include "helpers/DPIHelper.h"
 #include "FrequencyPlotView.h"
@@ -53,7 +55,7 @@ void FrequencyPlotVRuler::paintEvent(QPaintEvent*)
 	double fromDb = floor(s->yToDb(topLeft.y()) / dbStep) * dbStep;
 	double toDb = ceil(s->yToDb(bottomRight.y()) / dbStep) * dbStep;
 
-	painter.setPen(QColor(50, 50, 50));
+    painter.setPen(qApp->palette().text().color());
 	for (double db = toDb; db <= fromDb; db += dbStep)
 	{
 		if (abs(db) < 1e-6)
@@ -97,7 +99,11 @@ void FrequencyPlotVRuler::paintEvent(QPaintEvent*)
 void FrequencyPlotVRuler::wheelEvent(QWheelEvent* event)
 {
 	FrequencyPlotView* view = qobject_cast<FrequencyPlotView*>(parentWidget());
-	view->zoom(0, event->angleDelta().y(), 0, event->y());
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    view->zoom(0, event->angleDelta().y(), 0, event->y());
+#else
+    view->zoom(0, event->angleDelta().y(), 0, event->position().y());
+#endif
 }
 
 void FrequencyPlotVRuler::mouseMoveEvent(QMouseEvent* event)

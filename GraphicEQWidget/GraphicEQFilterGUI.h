@@ -20,6 +20,7 @@
 #pragma once
 
 #include <QRegularExpression>
+#include <QCheckBox>
 #include <QWidget>
 #include "GraphicEQFilterGUIScene.h"
 
@@ -36,11 +37,16 @@ public:
 	~GraphicEQFilterGUI();
 
     void store(QString& parameters);
+    void storeCsv(QString &parameters);
     void load(const QString &parameters);
 
     void loadPreferences(const QVariantMap& prefs);
     void storePreferences(QVariantMap& prefs);
 
+    QCheckBox* chk_enable;
+    void setSidebarHidden(bool hidden);
+    void set15BandFreeMode(bool e);
+    void loadMap(const QMap<float, float> &parameters);
 private slots:
 	void insertRow(int index, double hz, double db);
 	void removeRow(int index);
@@ -61,15 +67,22 @@ private slots:
 	void on_actionNormalizeResponse_triggered();
 	void on_actionResetResponse_triggered();
 
+    void on_actionImport_AutoEQ_result_triggered();
 signals:
-    void updateModel();
+    void updateModel(bool isMoving);
+    void updateModelEnd();
+    void mouseUp();
     void updateChannels();
+    void autoeqClicked();
 
 private:
 	void setFreqEditable(bool editable);
+    void setAutoEqAvailable(bool visible);
+    void setEnableSwitchVisible(bool visible);
 
 	Ui::GraphicEQFilterGUI* ui;
 	GraphicEQFilterGUIScene* scene;
 	QString configPath;
+    bool freeMode15 = false;
 	static QRegularExpression numberRegEx;
 };

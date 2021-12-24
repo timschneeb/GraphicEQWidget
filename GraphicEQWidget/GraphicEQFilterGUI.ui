@@ -13,9 +13,9 @@
   <property name="windowTitle">
    <string notr="true"/>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="7,2">
    <property name="spacing">
-    <number>3</number>
+    <number>6</number>
    </property>
    <property name="leftMargin">
     <number>0</number>
@@ -55,147 +55,194 @@
     </widget>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <property name="spacing">
-      <number>0</number>
+    <widget class="QWidget" name="sidebar" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>130</width>
+       <height>0</height>
+      </size>
      </property>
-     <item>
-      <widget class="QTableWidget" name="tableWidget">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>50</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="palette">
-        <palette>
-         <active>
-          <colorrole role="Highlight">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>51</red>
-             <green>153</green>
-             <blue>255</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </active>
-         <inactive>
-          <colorrole role="Highlight">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>122</red>
-             <green>189</green>
-             <blue>255</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </inactive>
-         <disabled>
-          <colorrole role="Highlight">
-           <brush brushstyle="SolidPattern">
-            <color alpha="255">
-             <red>51</red>
-             <green>153</green>
-             <blue>255</blue>
-            </color>
-           </brush>
-          </colorrole>
-         </disabled>
-        </palette>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QAbstractScrollArea::AdjustToContents</enum>
-       </property>
-       <property name="horizontalScrollMode">
-        <enum>QAbstractItemView::ScrollPerPixel</enum>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-       <property name="columnCount">
-        <number>2</number>
-       </property>
-       <attribute name="horizontalHeaderVisible">
-        <bool>false</bool>
-       </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>10</number>
-       </attribute>
-       <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>10</number>
-       </attribute>
-       <attribute name="horizontalHeaderHighlightSections">
-        <bool>false</bool>
-       </attribute>
-       <attribute name="verticalHeaderMinimumSectionSize">
-        <number>23</number>
-       </attribute>
-       <attribute name="verticalHeaderDefaultSectionSize">
-        <number>23</number>
-       </attribute>
-       <column>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QCheckBox" name="chk_enable">
         <property name="text">
-         <string>Freq.</string>
+         <string>Enable Graphic EQ</string>
         </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Gain</string>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-       </column>
-      </widget>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="spacing">
-        <number>6</number>
-       </property>
-       <property name="leftMargin">
-        <number>6</number>
-       </property>
-       <property name="topMargin">
-        <number>4</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QRadioButton" name="radioButton15">
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="Highlight">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>51</red>
+              <green>153</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Highlight">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>122</red>
+              <green>189</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Highlight">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>51</red>
+              <green>153</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+        <property name="horizontalScrollMode">
+         <enum>QAbstractItemView::ScrollPerPixel</enum>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="columnCount">
+         <number>2</number>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>10</number>
+        </attribute>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>10</number>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderMinimumSectionSize">
+         <number>23</number>
+        </attribute>
+        <attribute name="verticalHeaderDefaultSectionSize">
+         <number>23</number>
+        </attribute>
+        <column>
          <property name="text">
-          <string>15-band</string>
+          <string>Freq.</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="radioButton31">
+        </column>
+        <column>
          <property name="text">
-          <string>31-band</string>
+          <string>Gain</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="radioButtonVar">
-         <property name="text">
-          <string>variable</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QToolBar" name="toolBar"/>
-     </item>
-    </layout>
+        </column>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="topMargin">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="autoeq">
+          <property name="text">
+           <string>AutoEQ database...</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <property name="leftMargin">
+         <number>6</number>
+        </property>
+        <property name="topMargin">
+         <number>4</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QRadioButton" name="radioButton15">
+          <property name="text">
+           <string>15-band</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioButton31">
+          <property name="text">
+           <string>31-band</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioButtonVar">
+          <property name="text">
+           <string>variable</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QToolBar" name="toolBar"/>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
   <action name="actionImport">
@@ -210,7 +257,7 @@
   <action name="actionExport">
    <property name="icon">
     <iconset resource="GraphicEQWidget.qrc">
-     <normaloff>:/icons/document-save-as.ico</normaloff>:/icons/document-save-as.ico</iconset>
+     <normaloff>:/icons/document-save.ico</normaloff>:/icons/document-save.ico</iconset>
    </property>
    <property name="text">
     <string>Export</string>
@@ -243,6 +290,18 @@
     <string>Reset response</string>
    </property>
   </action>
+  <action name="actionImport_AutoEQ_result">
+   <property name="icon">
+    <iconset resource="GraphicEQWidget.qrc">
+     <normaloff>:/icons/document-open.ico</normaloff>:/icons/document-open.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Import EqualizerAPO settings</string>
+   </property>
+   <property name="toolTip">
+    <string>Import EqualizerAPO settings</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -260,5 +319,6 @@
  <connections/>
  <slots>
   <slot>updateItemList()</slot>
+  <slot>on_actionImport_AutoEQ_result()</slot>
  </slots>
 </ui>
