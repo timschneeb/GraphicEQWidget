@@ -169,7 +169,8 @@ void GraphicEQFilterGUI::load(const QString& parameters)
     }
     else
     {
-        emit updateModel(false);
+        // Don't send signals if load() is called
+        // emit updateModel(false);
     }
 }
 
@@ -490,6 +491,7 @@ void GraphicEQFilterGUI::on_actionImport_AutoEQ_result_triggered()
         {
             QTextStream stream(&file);
             load(file.readAll());
+            emit updateModel(false);
         }
     }
 }
