@@ -32,7 +32,7 @@ struct FilterNode
 		this->dbGain = dbGain;
 	}
 
-	bool operator<(FilterNode other)
+	bool operator<(FilterNode other) const
 	{
 		return freq < other.freq;
 	}
