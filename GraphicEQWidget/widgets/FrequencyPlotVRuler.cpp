@@ -109,5 +109,9 @@ void FrequencyPlotVRuler::wheelEvent(QWheelEvent* event)
 void FrequencyPlotVRuler::mouseMoveEvent(QMouseEvent* event)
 {
 	FrequencyPlotView* view = qobject_cast<FrequencyPlotView*>(parentWidget());
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     view->setLastMousePos(QPoint(0, std::min(event->y(), view->viewport()->height() - 1)));
+#else
+    view->setLastMousePos(QPoint(0, std::min(event->position().y(), (double)view->viewport()->height() - 1)));
+#endif
 }

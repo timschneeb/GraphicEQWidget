@@ -218,8 +218,13 @@ void FrequencyPlotView::mouseMoveEvent(QMouseEvent* event)
 {
 	if (event->buttons() & Qt::RightButton)
 	{
-		horizontalScrollBar()->setValue(horizontalScrollBar()->value() - (event->x() - lastMousePos.x()));
-		verticalScrollBar()->setValue(verticalScrollBar()->value() - (event->y() - lastMousePos.y()));
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+        horizontalScrollBar()->setValue(horizontalScrollBar()->value() - (event->x() - lastMousePos.x()));
+        verticalScrollBar()->setValue(verticalScrollBar()->value() - (event->y() - lastMousePos.y()));
+#else
+        horizontalScrollBar()->setValue(horizontalScrollBar()->value() - (event->position().x() - lastMousePos.x()));
+        verticalScrollBar()->setValue(verticalScrollBar()->value() - (event->position().y() - lastMousePos.y()));
+#endif
 	}
 	else
 	{
